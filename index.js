@@ -15,11 +15,11 @@ var Main = require('./routes/admin')
 app.use('/api/admin', Main);
 
 
-// app.use( express.static( path.join(__dirname, 'build') ) );
+app.use( express.static( path.join(__dirname, 'build') ) );
 
-// app.get('/', function(request, response){
-//   response.sendFile( path.join(__dirname, 'build/index.html') )
-// });
+app.get('/', function(request, response){
+  response.sendFile( path.join(__dirname, 'build/index.html') )
+});
 
 
 app.listen(8000); // 80 => 3000번 포트로!
