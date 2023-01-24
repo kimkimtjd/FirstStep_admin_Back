@@ -32,6 +32,47 @@ router.get('/Class/list',cors() , urlencodedParser  , function (req, res) {
 });
 
 
+// 컨설팅 승인
+router.post('/Consulting/Prove/:id',cors() , urlencodedParser  , function (req, res) {
+    const id = req.params.id;
+
+    db.mysql.query('SELECT * from Consulting WHERE id = ?', [id], (error, rows, fields) => {
+        if (rows.length === 1) {
+            db.mysql.query(" UPDATE User SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
+
+                if (err) throw err;
+                res.json({result: 'success'})            
+            
+              });
+          
+        }
+        else {
+            res.json({result: 'success'})            
+        } 
+    });
+
+});
+
+
+router.post('/Class/Prove/:id',cors() , urlencodedParser  , function (req, res) {
+    const id = req.params.id;
+
+    db.mysql.query('SELECT * from Consulting WHERE id = ?', [id], (error, rows, fields) => {
+        if (rows.length === 1) {
+            db.mysql.query(" UPDATE User SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
+
+                if (err) throw err;
+                res.json({result: 'success'})            
+            
+              });
+          
+        }
+        else {
+            res.json({result: 'success'})            
+        } 
+    });
+
+});
 
 
 module.exports = router;
