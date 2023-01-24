@@ -22,6 +22,18 @@ router.get('/Consulting/list',cors() , urlencodedParser  , function (req, res) {
     });
 });
 
+// 컨설팅 상세보기
+router.get('/Consulting/detail/:id',cors() , urlencodedParser  , function (req, res) {
+
+    const id = req.params.id;
+
+    db.mysql.query(
+        'SELECT * from Consulting WHERE id = ?',[id] , (error, rows, fields) => {
+             res.json(rows)
+    });
+});
+
+
 // 클래스 리스트
 router.get('/Class/list',cors() , urlencodedParser  , function (req, res) {
     db.mysql.query(
@@ -31,8 +43,18 @@ router.get('/Class/list',cors() , urlencodedParser  , function (req, res) {
 
 });
 
+// 컨설팅 상세보기
+router.get('/Class/detail/:id',cors() , urlencodedParser  , function (req, res) {
 
-// 컨설팅 승인
+    const id = req.params.id;
+
+    db.mysql.query(
+        'SELECT * from Tutoring WHERE id = ?',[id] , (error, rows, fields) => {
+             res.json(rows)
+    });
+});
+
+// 컨설팅 승인 하기
 router.post('/Consulting/Prove/:id',cors() , urlencodedParser  , function (req, res) {
     const id = req.params.id;
 
@@ -53,7 +75,7 @@ router.post('/Consulting/Prove/:id',cors() , urlencodedParser  , function (req, 
 
 });
 
-
+// 클래스 승인 하기
 router.post('/Class/Prove/:id',cors() , urlencodedParser  , function (req, res) {
     const id = req.params.id;
 
