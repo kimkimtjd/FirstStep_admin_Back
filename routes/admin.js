@@ -38,7 +38,7 @@ router.post('/Consulting/Prove/:id',cors() , urlencodedParser  , function (req, 
 
     db.mysql.query('SELECT * from Consulting WHERE id = ?', [id], (error, rows, fields) => {
         if (rows.length === 1) {
-            db.mysql.query(" UPDATE User SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
+            db.mysql.query(" UPDATE Consulting SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
 
                 if (err) throw err;
                 res.json({result: 'success'})            
@@ -57,9 +57,9 @@ router.post('/Consulting/Prove/:id',cors() , urlencodedParser  , function (req, 
 router.post('/Class/Prove/:id',cors() , urlencodedParser  , function (req, res) {
     const id = req.params.id;
 
-    db.mysql.query('SELECT * from Consulting WHERE id = ?', [id], (error, rows, fields) => {
+    db.mysql.query('SELECT * from Tutoring WHERE id = ?', [id], (error, rows, fields) => {
         if (rows.length === 1) {
-            db.mysql.query(" UPDATE User SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
+            db.mysql.query(" UPDATE Tutoring SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
 
                 if (err) throw err;
                 res.json({result: 'success'})            
