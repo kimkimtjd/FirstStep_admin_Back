@@ -106,5 +106,8 @@ router.get('/pay/list',cors() , urlencodedParser  , function (req, res) {
     });
 });
 
+// 멘토 정보 계좌 + 닉네임등 개인정보
+// 입금완료처리하기
+
 
 module.exports = router;
