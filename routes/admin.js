@@ -96,5 +96,15 @@ router.post('/Class/Prove/:id',cors() , urlencodedParser  , function (req, res) 
 
 });
 
+/* -------------------------- 입금확인 ----------------------------- */
+
+// 입금확인건 리스트
+router.get('/pay/list',cors() , urlencodedParser  , function (req, res) {
+    db.mysql.query(
+        'SELECT a.Nickname,a.email,b.id,b.Pay,b.Category,c.pay,b.pay_yn FROM User AS a RIGHT JOIN Consulting_Process AS b  ON a.email = b.mentIr_id LEFT JOIN User_add AS c ON SUBSTRING_INDEX(b.mentor_id, ",", 1) = c.User', (error, rows, fields) => {
+             res.json(rows)
+    });
+});
+
 
 module.exports = router;
