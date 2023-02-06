@@ -121,11 +121,11 @@ router.get('/pay/detail/:id',cors() , urlencodedParser  , function (req, res) {
 // 입금완료처리하기
 router.post('/pay/Prove/:id',cors() , urlencodedParser  , function (req, res) {
     const id = req.params.id;
-    const time = req.body.time;
+    const time = req.params.time;
 
     db.mysql.query('SELECT * from Consulting_Process WHERE id = ?', [id], (error, rows, fields) => {
         if (rows.length === 1) {
-            db.mysql.query("UPDATE Consulting_Process SET (Pay_yn,Entertime) = (?,?) WHERE id = ?",["Y", time , id] , function (err, result) {
+            db.mysql.query(" UPDATE Consulting_Process SET Pay_yn = ?  ,Entertime = ?  WHERE id = ?",["Y", time , id] , function (err, result) {
 
                 if (err) throw err;
                 res.json({result: 'success'})            
