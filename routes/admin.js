@@ -121,7 +121,7 @@ router.get('/pay/detail/:id',cors() , urlencodedParser  , function (req, res) {
 // 입금완료처리하기
 router.post('/pay/Prove/:id',cors() , urlencodedParser  , function (req, res) {
     const id = req.params.id;
-    const time = req.params.time;
+    const time = req.body.time;
 
     db.mysql.query('SELECT * from Consulting_Process WHERE id = ?', [id], (error, rows, fields) => {
         if (rows.length === 1) {
