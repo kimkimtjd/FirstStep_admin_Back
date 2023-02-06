@@ -124,7 +124,7 @@ router.post('/pay/Prove/:id',cors() , urlencodedParser  , function (req, res) {
 
     db.mysql.query('SELECT * from Consulting_Process WHERE id = ?', [id], (error, rows, fields) => {
         if (rows.length === 1) {
-            db.mysql.query(" UPDATE Consulting_Process SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
+            db.mysql.query(" UPDATE Consulting_Process SET Pay_yn = ? WHERE id = ?",["Y", id] , function (err, result) {
 
                 if (err) throw err;
                 res.json({result: 'success'})            
