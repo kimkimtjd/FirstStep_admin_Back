@@ -107,7 +107,36 @@ router.get('/pay/list',cors() , urlencodedParser  , function (req, res) {
 });
 
 // 멘토 정보 계좌 + 닉네임등 개인정보
+
+router.get('/pay/detail/:id',cors() , urlencodedParser  , function (req, res) {
+    
+    const id = req.params.id;
+
+    db.mysql.query(
+        'SELECT a.Nickname,a.email,b.pay FROM User AS a RIGHT JOIN User_add AS b ON a.email = b.User WHERE a.email = ?', [id] , (error, rows, fields) => {
+             res.json(rows)
+    });
+});
+
 // 입금완료처리하기
+router.post('/pay/Prove/:id',cors() , urlencodedParser  , function (req, res) {
+    const id = req.params.id;
+
+    db.mysql.query('SELECT * from Consulting_Process WHERE id = ?', [id], (error, rows, fields) => {
+        if (rows.length === 1) {
+            db.mysql.query(" UPDATE Consulting_Process SET Approve = ? WHERE id = ?",["Y", id] , function (err, result) {
+
+                if (err) throw err;
+                res.json({result: 'success'})            
+            
+              });
+        }
+        else {
+            res.json({result: 'fail'})            
+        } 
+    });
+
+});
 
 
 module.exports = router;
